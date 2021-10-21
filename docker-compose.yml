@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  nginx-reverse-proxy:
+    image: nginx
+    restart: always
+    ports:
+    - 8080:80
+    volumes:
+    - ./nginx_config/default.conf:/etc/nginx/conf.d/default.conf
+
+
+  web-server-1:
+    image: httpd
+    restart: always
+    ports:
+      - 8444:80
+    volumes: 
+      - ./server_1/:/usr/local/apache2/htdocs/
+
+
+  web-server-2:
+    image: httpd
+    restart: always
+    ports:
+      - 8555:80
+    volumes: 
+      - ./server_2/:/usr/local/apache2/htdocs/
